@@ -12,24 +12,18 @@ export class DashboardComponent implements OnInit {
     constructor() {
         this.sliders.push({
             imagePath: 'assets/images/bitcoin.jpg',
-            label: 'BitCoin',
+            label: 'BITCOIN',
             text: 'Digital Centralized Peer to Peer'
         });
 
         this.alerts.push({
             id: 1,
             type: 'success',
-            message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-                consectetur velit culpa molestias dignissimos
-                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`,
+            message: '',
         }, {
             id: 2,
             type: 'warning',
-            message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-                consectetur velit culpa molestias dignissimos
-                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`,
+            message: '',
         });
     }
     ngOnInit() {}
