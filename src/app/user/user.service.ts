@@ -4,13 +4,13 @@ import {Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { AppSettings } from '../../app.config';
+import {AppSettings} from '../../app.config';
 import {User} from './user';
 
 @Injectable()
 export class UserService {
 
-    private wsAPI = AppSettings.WS_API + 'user';
+    private wsAPI = AppSettings.WS_API + '/authenticate';
 
     constructor(private http: Http){}
 
@@ -22,9 +22,17 @@ export class UserService {
             .catch(this.handleErrorPromise);
     }
 
-    private extractData(res: Response) {
+    private extractData(res: Response){
+
+        let user = new User();
         let body = res.json();
-        return body.data || {};
+        if(body && body.loginInformation){
+            let loginInformation = body.loginInformation;
+            user.token = loginInformation.token;
+            user.name = loginInformation.name;
+        }
+
+        return user;
     }
 
     private handleErrorPromise(error: Response | any) {

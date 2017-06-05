@@ -10,9 +10,6 @@ import {User} from './../user/user';
 })
 export class LoginComponent implements OnInit {
 
-    username: string;
-    password: string;
-
     userData = new User();
     errorMessage: String;
 
@@ -24,7 +21,10 @@ export class LoginComponent implements OnInit {
 
     loginUser(username, password) {
 
-        var req = {username: username, password: password};
+        this.userData.login = username;
+        this.userData.password = password;
+
+        let req = {email: username, password: password};
 
         this.userService.loginUser(req)
             .then(user => {
@@ -34,8 +34,13 @@ export class LoginComponent implements OnInit {
 
     private userSession(user) {
         this.userData.token = user.token;
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('user', JSON.stringify(this.userData));
+        if(user.token != null && user.token != ''){
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('user', JSON.stringify(this.userData));
+        }else{
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.setItem('user', '');
+        }
     }
 
 }
