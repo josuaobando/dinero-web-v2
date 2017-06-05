@@ -10,6 +10,8 @@ import {User} from './../user/user';
 })
 export class LoginComponent implements OnInit {
 
+    private _first = 'A123B';
+
     userData = new User();
     errorMessage: String;
 

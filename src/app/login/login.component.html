@@ -1,22 +1,27 @@
 <div class="login-page">
-    <div class="row">
-        <div class="col-md-4 push-md-4">
-            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
-            <h1>BTC Admin</h1>
-            <form role="form">
-                <div class="form-content">
-                    <div class="form-group">
-                      <label for="username">Username</label>
-                      <input type="text" #username class="form-control" id="username" placeholder="Username" required>
-                    </div>
+  <div class="row">
+    <div class="col-md-4 push-md-4">
+      <img src="assets/images/logo.png" width="150px" class="user-avatar"/>
+      <h1>BTC Admin</h1>
+      <form>
 
-                    <div class="form-group">
-                      <label for="password">Password</label>
-                      <input type="password" #password class="form-control" id="password" placeholder="Password" required>
-                    </div>
-                </div>
-                <a class="btn rounded-btn" (click)="loginUser(username.value, password.value)"> Log in </a>
-            </form>
+        <input type="text" class="form-control" id="first" required [(ngModel)]="first">
+        **{{first}}**
+
+        <div class="form-content">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" #username class="form-control" id="username" placeholder="Username" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" #password class="form-control" id="password" placeholder="Password" required>
+          </div>
         </div>
+        <a class="btn rounded-btn" (click)="loginUser(username.value, password.value)"> Log in </a>
+      </form>
+
     </div>
+  </div>
 </div>
