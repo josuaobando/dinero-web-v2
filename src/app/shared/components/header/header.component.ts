@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import {User} from "../../../user/user";
 
 @Component({
     selector: 'app-header',
@@ -8,6 +9,11 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+    /**
+     * @type {User}
+     */
+    currentUser = new User();
 
     constructor(private translate: TranslateService, public router: Router) {
         this.router.events.subscribe((val) => {
@@ -17,7 +23,15 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    ngOnInit() {}
+    ngOnInit(){
+        let userStorage = localStorage.getItem('user');
+        if(userStorage){
+            let obj = JSON.parse(userStorage);
+            this.currentUser.login = obj.login;
+            this.currentUser.token = obj.token;
+            this.currentUser.name = obj.name;
+        }
+    }
 
     toggleSidebar() {
         const dom: any = document.querySelector('body');
@@ -30,6 +44,7 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
+        localStorage.removeItem('user');
         localStorage.removeItem('isLoggedIn');
     }
 

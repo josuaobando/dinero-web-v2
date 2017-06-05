@@ -9,7 +9,8 @@ export class AuthGuard implements CanActivate {
     }
 
     canActivate() {
-        if (localStorage.getItem('isLoggedIn')) {
+        let isLoggedIn = localStorage.getItem('isLoggedIn');
+        if(isLoggedIn){
             return true;
         }
 

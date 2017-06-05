@@ -15,7 +15,7 @@
                       <input type="password" #password class="form-control" id="password" placeholder="Password" required>
                     </div>
                 </div>
-                <a class="btn rounded-btn" [routerLink]="['/dashboard']" (click)="loginUser(username.value, password.value)"> Log in </a>
+                <a class="btn rounded-btn" (click)="loginUser(username.value, password.value)"> Log in </a>
             </form>
         </div>
     </div>

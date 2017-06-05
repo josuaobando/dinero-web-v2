@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
     loginUser(username, password) {
 
         this.userData.login = username;
-        this.userData.password = password;
-
         let req = {email: username, password: password};
 
         this.userService.loginUser(req)
@@ -34,12 +32,17 @@ export class LoginComponent implements OnInit {
 
     private userSession(user) {
         this.userData.token = user.token;
+        this.userData.name = user.name;
         if(user.token != null && user.token != ''){
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('user', JSON.stringify(this.userData));
+
+            this.router.navigate(['/dashboard']);
         }else{
             localStorage.setItem('isLoggedIn', 'false');
             localStorage.setItem('user', '');
+
+            this.router.navigate(['/login']);
         }
     }
 
