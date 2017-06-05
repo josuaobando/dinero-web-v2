@@ -43,9 +43,10 @@ export class HeaderComponent implements OnInit {
         dom.classList.toggle('rtl');
     }
 
-    onLoggedout() {
+    onLoggedOut() {
         localStorage.removeItem('user');
         localStorage.removeItem('isLoggedIn');
+        this.router.navigate(['/login']);
     }
 
     changeLang(language: string) {
