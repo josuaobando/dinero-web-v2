@@ -10,9 +10,7 @@ import {User} from './../user/user';
 })
 export class LoginComponent implements OnInit {
 
-    private _first = 'A123B';
-
-    userData = new User();
+    user = new User();
     errorMessage: String;
 
     constructor(public router: Router, private userService: UserService) {
@@ -21,11 +19,8 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
     }
 
-    loginUser(username, password) {
-
-        this.userData.login = username;
-        let req = {email: username, password: password};
-
+    loginUser() {
+        let req = {email: this.user.login, password: this.user.password};
         this.userService.loginUser(req)
             .then(user => {
                 this.userSession(user);
@@ -33,11 +28,11 @@ export class LoginComponent implements OnInit {
     }
 
     private userSession(user) {
-        this.userData.token = user.token;
-        this.userData.name = user.name;
+        this.user.token = user.token;
+        this.user.name = user.name;
         if(user.token != null && user.token != ''){
             localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('user', JSON.stringify(this.userData));
+            localStorage.setItem('user', JSON.stringify(this.user));
 
             this.router.navigate(['/dashboard']);
         }else{
