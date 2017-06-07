@@ -20,11 +20,16 @@ export class LoginComponent implements OnInit {
     }
 
     loginUser() {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('user', JSON.stringify(this.user));
+        this.router.navigate(['/dashboard']);
+        /*
         let req = {email: this.user.login, password: this.user.password};
         this.userService.loginUser(req)
             .then(user => {
                 this.userSession(user);
             }, error => this.errorMessage = <any>error);
+            */
     }
 
     private userSession(user) {
