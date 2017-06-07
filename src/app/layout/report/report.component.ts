@@ -9,6 +9,9 @@ import {Transactions} from './../../transaction/data';
 })
 export class ReportComponent implements OnInit {
 
+    beginDate: string;
+    endDate: string;
+
     filteredItems: Transaction[];
     pages: number = 4;
     pageSize: number = 10;

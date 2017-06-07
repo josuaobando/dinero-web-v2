@@ -1,5 +1,27 @@
 <app-page-header [heading]="'Report'" [icon]="'fa-table'"></app-page-header>
 
+<!-- Filters -->
+<div class="row">
+  <div class="col col-xl-12 col-lg-12">
+
+    <div class="card mb-3">
+      <div class="card-block">
+
+        <div class="form-inline">
+          <div class="input-group">
+            <input class="form-control" name="startDate" [(ngModel)]="beginDate" ngbDatepicker #bd="ngbDatepicker" (click)="bd.toggle()" placeholder="begin date" readonly>
+            <div class="input-group-addon"></div>
+            <input class="form-control" name="endDate" [(ngModel)]="endDate" ngbDatepicker #ed="ngbDatepicker" (click)="ed.toggle()" placeholder="end date" readonly>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Report -->
 <div class='row'>
 
   <div class="col col-xl-12 col-lg-12">
@@ -8,7 +30,7 @@
 
       <div class="card-header">Transactions</div>
 
-      <div class="card-block table-responsive">
+      <div class="card-block table-striped table-responsive">
 
         <table class="table">
           <thead>
@@ -18,11 +40,11 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of items">
-              <th scope="row">
+              <td scope="row">
                 <a href="javascript:void(0)">{{item.id}}</a>
-              </th>
-              <th>{{item.date}}</th>
-              <th>{{item.amount}}</th>
+              </td>
+              <td>{{item.date}}</td>
+              <td>{{item.amount}}</td>
             </tr>
           </tbody>
         </table>
