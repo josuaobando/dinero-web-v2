@@ -28,4 +28,20 @@ export class UserService extends WSService {
         return user;
     }
 
+    logoutUser(req: Object): Promise<boolean> {
+        req['method'] = 'logout';
+        return this.exPost(req, this.extractLogoutData)
+    }
+
+    private extractLogoutData(res: Response) {
+
+        let logout: boolean;
+        let body = res.json();
+        if (body && body.logout) {
+            logout = body.logout;
+        }
+
+        return logout;
+    }
+
 }
