@@ -2,87 +2,98 @@
 
 <!-- Filters -->
 <div class="row">
-  <div class="col col-xl-12 col-lg-12">
+    <div class="col col-xl-12">
 
-    <div class="card mb-3">
-      <div class="card-block">
+        <form name="reportForm" #reportForm="ngForm" (ngSubmit)="actionSearch()" novalidate>
+            <div class="card mb-3">
+                <div class="card-block">
 
-        <div class="form-inline">
-          <div class="input-group">
-            <input class="form-control" name="startDate" [(ngModel)]="beginDate" ngbDatepicker #bd="ngbDatepicker" (click)="bd.toggle()" placeholder="begin date" readonly>
-            <div class="input-group-addon"></div>
-            <input class="form-control" name="endDate" [(ngModel)]="endDate" ngbDatepicker #ed="ngbDatepicker" (click)="ed.toggle()" placeholder="end date" readonly>
-          </div>
-        </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <input class="form-control" name="startDate" [(ngModel)]="beginDate" ngbDatepicker #bd="ngbDatepicker" (click)="bd.toggle()" placeholder="Begin Date" readonly>
+                                <div class="input-group-addon"></div>
+                                <input class="form-control" name="endDate" [(ngModel)]="endDate" ngbDatepicker #ed="ngbDatepicker" (click)="ed.toggle()" placeholder="End Date" readonly>
+                            </div>
+                        </div>
+                    </div>
 
-      </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-success rounded-btn" [disabled]="!reportForm.form.valid">Search</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
     </div>
-
-  </div>
 </div>
 
 <!-- Report -->
 <div class='row'>
 
-  <div class="col col-xl-12 col-lg-12">
+    <div class="col col-xl-12 col-lg-12">
 
-    <div class="card mb-3">
+        <div class="card mb-3">
 
-      <div class="card-header">Transactions</div>
+            <div class="card-header">Transactions</div>
 
-      <div class="card-block table-striped table-responsive">
+            <div class="card-block table-striped table-responsive">
 
-        <table class="table">
-          <thead>
-            <th>Id</th>
-            <th>Date</th>
-            <th>Amount</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of items">
-              <td scope="row">
-                <a href="javascript:void(0)">{{item.id}}</a>
-              </td>
-              <td>{{item.date}}</td>
-              <td>{{item.amount}}</td>
-            </tr>
-          </tbody>
-        </table>
+                <table class="table">
+                    <thead>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of items">
+                        <td scope="row">
+                            <a href="javascript:void(0)">{{item.id}}</a>
+                        </td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.amount}}</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-      </div>
+            </div>
 
-      <div class="card-footer">
+            <!-- Pagination -->
+            <div class="card-footer" *ngIf="items && items.length > 0">
 
-        <div class="pull-left">
-          <nav aria-label="Page navigation">
-            <ul class="pagination">
-              <li class="page-item" [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}">
-                <a class="page-link" aria-label="Previous" (click)="prevPage()" href="javascript:void(0)">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
+                <div class="pull-left">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item" [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}">
+                                <a class="page-link" aria-label="Previous" (click)="prevPage()" href="javascript:void(0)">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
 
-              <li class="page-item" *ngFor="let page of pagesIndex" [ngClass]="{'active': (currentIndex == page)}">
-                <a class="page-link" (click)="setPage(page)" href="javascript:void(0)">{{page}}</a>
-              </li>
+                            <li class="page-item" *ngFor="let page of pagesIndex" [ngClass]="{'active': (currentIndex == page)}">
+                                <a class="page-link" (click)="setPage(page)" href="javascript:void(0)">{{page}}</a>
+                            </li>
 
-              <li class="page-item" aria-label="Next" [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}">
-                <a class="page-link" (click)="nextPage()" href="javascript:void(0)">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+                            <li class="page-item" aria-label="Next" [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}">
+                                <a class="page-link" (click)="nextPage()" href="javascript:void(0)">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="pull-right">
+                    <strong>Page {{currentIndex}}/{{pageNumber}}</strong>
+                </div>
+
+            </div>
+
         </div>
-
-        <div class="pull-right">
-          <strong>Page {{currentIndex}}/{{pageNumber}}</strong>
-        </div>
-
-      </div>
 
     </div>
-
-  </div>
 
 </div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import {TransactionService} from './../../transaction/transaction.service';
 import { ReportComponent } from './report.component';
 import { TablesRoutingModule } from './report-routing.module';
 import { PageHeaderModule } from './../../shared';
@@ -15,6 +16,11 @@ import { PageHeaderModule } from './../../shared';
         FormsModule,
         NgbModule.forRoot()
     ],
-    declarations: [ReportComponent]
+    declarations: [
+        ReportComponent
+    ],
+    providers: [
+        TransactionService
+    ],
 })
 export class ReportModule { }

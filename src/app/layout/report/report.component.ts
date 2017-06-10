@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Transaction} from './../../transaction/transaction';
-import {Transactions} from './../../transaction/data';
+import {TransactionService} from './../../transaction/transaction.service';
 
 @Component({
     selector: 'app-report',
@@ -9,24 +9,55 @@ import {Transactions} from './../../transaction/data';
 })
 export class ReportComponent implements OnInit {
 
-    beginDate: string;
-    endDate: string;
+    errorMessage: string;
+    beginDate: any;
+    endDate: any;
 
-    filteredItems: Transaction[];
+    filteredItems: Array<Transaction>;
     pages: number = 4;
     pageSize: number = 10;
     pageNumber: number = 0;
     currentIndex: number = 1;
-    items: Transaction[];
+    items: Array<Transaction>;
     pagesIndex: Array<number>;
     pageStart: number = 1;
 
-    constructor() {
-        this.filteredItems = Transactions;
-        this.init();
+    constructor(private transactionService: TransactionService) {
+        this.filteredItems = Array<Transaction>();
+        this.items = Array<Transaction>();
+
+        let now = new Date();
+        let initialDate = {
+            "year": now.getFullYear(),
+            "month": now.getMonth() + 1,
+            "day": now.getDate()
+        };
+        this.beginDate = initialDate;
+        this.endDate = initialDate;
     };
 
     ngOnInit() {
+    }
+
+    private formatDate(dateObj){
+        let date = new Date(dateObj.year, dateObj.month, dateObj.day);
+        return date.toDateString();
+    }
+
+    actionSearch() {
+        this.filteredItems = Array<Transaction>();
+        let req = {dateFrom: this.formatDate(this.beginDate), dateTo: this.formatDate(this.endDate)};
+        this.transactionService.getTransactions(req)
+            .then(transactions => {
+                this.reportTransactions(transactions);
+            }, error => this.errorMessage = <any>error);
+    }
+
+    reportTransactions(transactions) {
+        if(transactions && transactions instanceof Array && transactions.length){
+            this.filteredItems = transactions;
+            this.init();
+        }
     }
 
     init() {
@@ -85,5 +116,5 @@ export class ReportComponent implements OnInit {
         this.currentIndex = index;
         this.refreshItems();
     }
-    
+
 }
