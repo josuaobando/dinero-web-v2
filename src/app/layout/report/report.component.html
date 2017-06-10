@@ -42,11 +42,21 @@
 
             <div class="card-block table-striped table-responsive">
 
-                <table class="table">
+                <table class="table wrap-table">
                     <thead>
-                    <th>Id</th>
-                    <th>Date</th>
-                    <th>Amount</th>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Address</th>
+
+                        <th>Requested Amount</th>
+                        <th>Rate</th>
+                        <th>Final Amount</th>
+                        <th>Amount</th>
+                        <th>Fee</th>
+                        <th>M Fee</th>
+                        <th>Reference</th>
+                        <th>Processing Fee</th>
+                        <th>Exchange Fee</th>
                     </thead>
                     <tbody>
                     <tr *ngFor="let item of items">
@@ -54,7 +64,17 @@
                             <a href="javascript:void(0)">{{item.id}}</a>
                         </td>
                         <td>{{item.date}}</td>
-                        <td>{{item.amount}}</td>
+                        <td>{{item.address}}</td>
+
+                        <td>{{item.requestedAmount | number:'1.1-5'}}</td>
+                        <td>{{item.rate | number:'1.1-5'}}</td>
+                        <td>{{item.finalAmount | number:'1.1-5'}}</td>
+                        <td>{{item.amount | number:'1.1-5'}}</td>
+                        <td>{{item.fee | number:'1.1-5'}}</td>
+                        <td>{{item.mFee | number:'1.1-5'}}</td>
+                        <td>{{item.reference}}</td>
+                        <td>{{item.processingFee | number:'1.1-5'}}</td>
+                        <td>{{item.exchangeFee | number:'1.1-5'}}</td>
                     </tr>
                     </tbody>
                 </table>

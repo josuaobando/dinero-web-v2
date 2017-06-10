@@ -19,9 +19,9 @@ export class WSService {
      * execute post
      *
      * @param req
-     * @param success callback
+     * @param success
      *
-     * @returns {Maybe<T>|Observable<R|T>|Promise<R>}
+     * @returns {Observable<R|T>|Promise<R>|Maybe<T>}
      */
     exPost(req: Object, success): Promise<Object> {
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Transaction} from './../../transaction/transaction';
-import {TransactionService} from './../../transaction/transaction.service';
+import {Transaction} from '../../transaction/transaction';
+import {TransactionService} from '../../transaction/transaction.service';
 
 @Component({
     selector: 'app-report',
@@ -40,7 +40,7 @@ export class ReportComponent implements OnInit {
     }
 
     private formatDate(dateObj){
-        let date = new Date(dateObj.year, dateObj.month, dateObj.day);
+        let date = new Date(dateObj.year, dateObj.month - 1, dateObj.day);
         return date.toDateString();
     }
 

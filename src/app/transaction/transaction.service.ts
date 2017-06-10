@@ -28,7 +28,17 @@ export class TransactionService extends WSService{
 
                     transaction.id = <number>transactionData.sbTransaction_id;
                     transaction.date = <string>transactionData.created_at;
-                    transaction.amount = <string>transactionData.amount;
+                    transaction.address = <string>transactionData.address;
+
+                    transaction.requestedAmount = <number>transactionData.requestedAmount;
+                    transaction.rate = <number>transactionData.rate;
+                    transaction.finalAmount = <number>transactionData.finalAmount;
+                    transaction.amount = <number>transactionData.amount;
+                    transaction.fee = <number>transactionData.fee;
+                    transaction.mFee = <number>transactionData.mFee;
+                    transaction.reference = <number>transactionData.reference;
+                    transaction.processingFee = <number>transactionData.processingFee;
+                    transaction.exchangeFee = <number>transactionData.exchangeFee;
 
                     transactions.push(transaction);
                 }

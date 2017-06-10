@@ -4,3 +4,113 @@
 @import "utils";
 @import "rtl";
 @import "responsive";
+
+input:-moz-read-only { /* For Firefox */
+    background-color: white !important;
+    cursor: pointer;
+}
+
+input:read-only {
+    background-color: white !important;
+    cursor: pointer;
+}
+
+body {
+    font-size: small !important;
+}
+
+select {
+    &[disabled], &.disabled {
+        pointer-events: none;
+        cursor: not-allowed;
+        filter: alpha(opacity=65);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        opacity: .65;
+    }
+}
+
+input {
+    &[type="text"] {
+        &[disabled], &.disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            filter: alpha(opacity=65);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            opacity: .65;
+        }
+    }
+    &[type="number"] {
+        &[disabled], &.disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            filter: alpha(opacity=65);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            opacity: .65;
+        }
+    }
+    &[type="text"] {
+        &[readonly], &.readonly {
+            background-color: white;
+        }
+    }
+}
+
+.sidebar {
+    top: 54px!important;
+}
+
+.main-container[_ngcontent-c1] {
+    margin-left: 165px!important;
+}
+
+/* TABLE */
+.table > thead > tr > th {
+    white-space: nowrap !important;
+}
+
+.wrap-table {
+    overflow-x: scroll;
+    td {
+        white-space: nowrap;
+    }
+}
+
+th {
+    white-space: nowrap;
+}
+
+.table > {
+    thead > tr > td.warning, tbody > tr > td.warning, tfoot > tr > td.warning, thead > tr > th.warning, tbody > tr > th.warning, tfoot > tr > th.warning, thead > tr.warning > td, tbody > tr.warning > td, tfoot > tr.warning > td, thead > tr.warning > th, tbody > tr.warning > th, tfoot > tr.warning > th {
+        background-color: #faf2cc !important;
+    }
+}
+
+.table-hover > tbody > tr {
+    > {
+        td.warning:hover, th.warning:hover {
+            background-color: #f6e9aa !important;
+        }
+    }
+    &.warning:hover > td, &:hover > .warning, &.warning:hover > th {
+        background-color: #f6e9aa !important;
+    }
+}
+
+/* END TABLE */
+
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 959px) {
+    .wrap-table {
+        overflow-x: scroll;
+    }
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 150px !important;
+        top: 54px !important;
+    }
+}
