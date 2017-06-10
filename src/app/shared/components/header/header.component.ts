@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
         if(userStorage){
             let obj = JSON.parse(userStorage);
             this.currentUser.login = obj.login;
-            this.currentUser.token = obj.token;
             this.currentUser.name = obj.name;
         }
     }

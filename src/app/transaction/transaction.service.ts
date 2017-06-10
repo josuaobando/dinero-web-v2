@@ -1,25 +1,17 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Headers, RequestOptions} from '@angular/http';
+import {Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import {AppSettings} from '../../app.config';
 import {Transaction} from './transaction';
+import {WSService} from "../shared/services/ws.services";
 
 @Injectable()
-export class TransactionService {
-
-    private wsAPI = AppSettings.WS_API + '/report';
-
-    constructor(private http: Http){}
+export class TransactionService extends WSService{
 
     getTransactions(req: Object): Promise<Array<Transaction>> {
-        let headers = new Headers({'Content-Type': 'application/json'});
-        let options = new RequestOptions({headers: headers});
-        return this.http.post(this.wsAPI, req, options).toPromise()
-            .then(this.extractTransactionsData)
-            .catch(this.handleErrorPromise);
+        req['method'] = 'report';
+        return this.exPost(req, this.extractTransactionsData)
     }
 
     private extractTransactionsData(res: Response){
@@ -47,8 +39,4 @@ export class TransactionService {
         return transactions;
     }
 
-    private handleErrorPromise(error: Response | any) {
-        console.error(error.message || error);
-        return Promise.reject(error.message || error);
-    }
 }

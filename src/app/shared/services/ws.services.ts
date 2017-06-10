@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http} from '@angular/http';
 import {Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -20,22 +20,35 @@ export class WSService {
      *
      * @param req
      * @param success callback
-     * @param error callback
      *
      * @returns {Maybe<T>|Observable<R|T>|Promise<R>}
      */
-    exPost(req: Object, success, error): Promise<Object> {
+    exPost(req: Object, success): Promise<Object> {
+
+        let userStorage = localStorage.getItem('user');
+        if(userStorage){
+            let user = JSON.parse(userStorage);
+            req['token'] = user.token;
+        }
 
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
 
-        let wsAPI = AppSettings.WS_API + '/' + req['method'];
+        let method= req['method'];
+        delete req['method'];
+
+        let wsAPI = AppSettings.WS_API + method;
         if (AppSettings.isDEV) {
             req['XDEBUG_SESSION_START'] = 'ECLIPSE_DBGP';
         }
 
         return this.http.post(wsAPI, req, options).toPromise()
             .then(success)
-            .catch(error);
+            .catch(this.handleErrorPromise);
+    }
+
+    private handleErrorPromise(error: Response | any) {
+        console.error(error.message || error);
+        return Promise.reject(error.message || error);
     }
 }
