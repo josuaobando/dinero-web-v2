@@ -1,35 +1,66 @@
 <app-page-header [heading]="'Report'" [icon]="'fa-table'"></app-page-header>
 
 <!-- Filters -->
-<div class="row">
-    <div class="col col-xl-12">
+<form name="reportForm" #reportForm="ngForm" (ngSubmit)="actionSearch()" novalidate>
+    <div class="form-group row">
+        <div class="col col-xl-12">
 
-        <form name="reportForm" #reportForm="ngForm" (ngSubmit)="actionSearch()" novalidate>
-            <div class="card mb-3">
-                <div class="card-block">
+            <!-- Optional filters -->
+            <div class="col col-sm-6">
 
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <div class="input-group">
-                                <input class="form-control" name="startDate" [(ngModel)]="beginDate" ngbDatepicker #bd="ngbDatepicker" (click)="bd.toggle()" placeholder="Begin Date" readonly>
-                                <div class="input-group-addon"></div>
-                                <input class="form-control" name="endDate" [(ngModel)]="endDate" ngbDatepicker #ed="ngbDatepicker" (click)="ed.toggle()" placeholder="End Date" readonly>
-                            </div>
-                        </div>
+                <div class="form-group row">
+                    <div class="input-group">
+                        <select class="form-control" name="transactionStatusId" [(ngModel)]="transactionStatusId" placeholder="Status">
+                            <option value="0">All</option>
+                        </select>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-success rounded-btn" [disabled]="!reportForm.form.valid">Search</button>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </form>
 
+                <div class="form-group row">
+                    <div class="input-group">
+                        <select class="form-control" name="transactionTypeId" [(ngModel)]="transactionTypeId" placeholder="Type">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="input-group">
+                        <select class="form-control" name="transactionCurrencyId" [(ngModel)]="transactionCurrencyId" placeholder="Currency">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="input-group">
+                        <input class="form-control" name="startDate" [(ngModel)]="beginDate" ngbDatepicker #bd="ngbDatepicker" (click)="bd.toggle()" placeholder="Begin Date" readonly>
+                        <div class="input-group-addon"></div>
+                        <input class="form-control" name="endDate" [(ngModel)]="endDate" ngbDatepicker #ed="ngbDatepicker" (click)="ed.toggle()" placeholder="End Date" readonly>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Specific filters -->
+            <div class="col col-sm-6">
+
+                <div class="form-group row">
+                    <div class="input-group">
+                        <input class="form-control" name="address" [(ngModel)]="address" placeholder="Address">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
-</div>
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-success rounded-btn" [disabled]="!reportForm.form.valid">Search</button>
+        </div>
+    </div>
+</form>
 
 <!-- Report -->
 <div class='row'>
@@ -44,19 +75,19 @@
 
                 <table class="table wrap-table">
                     <thead>
-                        <th>Id</th>
-                        <th>Date</th>
-                        <th>Address</th>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>Address</th>
 
-                        <th>Requested Amount</th>
-                        <th>Rate</th>
-                        <th>Final Amount</th>
-                        <th>Amount</th>
-                        <th>Fee</th>
-                        <th>M Fee</th>
-                        <th>Reference</th>
-                        <th>Processing Fee</th>
-                        <th>Exchange Fee</th>
+                    <th>Requested Amount</th>
+                    <th>Rate</th>
+                    <th>Final Amount</th>
+                    <th>Amount</th>
+                    <th>Fee</th>
+                    <th>M Fee</th>
+                    <th>Reference</th>
+                    <th>Processing Fee</th>
+                    <th>Exchange Fee</th>
                     </thead>
                     <tbody>
                     <tr *ngFor="let item of items">
