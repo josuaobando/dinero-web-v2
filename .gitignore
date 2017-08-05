@@ -10,6 +10,7 @@
 
 # IDEs and editors
 /.idea
+.idea
 .project
 .classpath
 .c9/
@@ -42,3 +43,4 @@ e2e
 .DS_Store
 Thumbs.db
 e2e/
+app.config.ts
