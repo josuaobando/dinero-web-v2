@@ -8,32 +8,33 @@ import {WSService} from "../shared/services/ws.services";
 
 @Injectable()
 export class UserService extends WSService {
+    /*
+     loginUser(req: Object): Promise<any> {
+     req['method'] = 'authenticate';
+     return this.exPost(req, this.extractUserData)
+     }
+     */
 
-    loginUser(req: Object): Promise<User> {
-
+    loginUser(req: Object, callback) {
         req['method'] = 'authenticate';
-        return this.exPost(req, this.extractUserData)
+        this.exPost(req, function(res, message) {
+            let user = new User();
+
+            if (res && res.account) {
+                user.token = res.token;
+                user.name = res.account.username;
+            }
+
+            callback(user, message);
+        })
     }
 
-    private extractUserData(res: Response) {
-
-        let user = new User();
-        let body = res.json();
-        if (body && body.loginInformation) {
-            let loginInformation = body.loginInformation;
-            user.token = loginInformation.token;
-            user.name = loginInformation.name;
-        }
-
-        return user;
-    }
-
-    logoutUser(req: Object): Promise<boolean> {
+    logoutUser(req: Object): Promise<any> {
         req['method'] = 'logout';
-        return this.exPost(req, this.extractLogoutData)
+        return this.post(req, this.extractLogoutData)
     }
 
-    private extractLogoutData(res: Response) {
+    extractLogoutData(res: Response) {
 
         let logout: boolean;
         let body = res.json();

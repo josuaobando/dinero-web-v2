@@ -8,13 +8,13 @@ import {WSService} from "../shared/services/ws.services";
 
 @Injectable()
 export class TransactionService extends WSService{
-
-    getTransactions(req: Object): Promise<Array<Transaction>> {
+/*
+    getTransactions(req: Object): Promise<any> {
         req['method'] = 'report';
         return this.exPost(req, this.extractTransactionsData)
     }
-
-    private extractTransactionsData(res: Response){
+*/
+    extractTransactionsData(res: Response){
         let transactions = Array<Transaction>();
 
         let body = res.json();

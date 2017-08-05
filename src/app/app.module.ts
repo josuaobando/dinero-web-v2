@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpModule, Http} from '@angular/http';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -11,7 +11,7 @@ import {AppComponent} from './app.component';
 import {AuthGuard} from './shared';
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: Http) {
+export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 
@@ -20,13 +20,13 @@ export function HttpLoaderFactory(http: Http) {
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule,
+        HttpClientModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
                 useFactory: HttpLoaderFactory,
-                deps: [Http]
+                deps: [HttpClient]
             }
         })
     ],

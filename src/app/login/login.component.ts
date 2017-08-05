@@ -20,27 +20,24 @@ export class LoginComponent implements OnInit {
     }
 
     loginUser() {
-        let req = {email: this.user.login, password: this.user.password};
-        this.userService.loginUser(req)
-            .then(user => {
-                this.userSession(user);
-            }, error => this.errorMessage = <any>error);
-    }
+        let req = {username: this.user.login, password: this.user.password};
 
-    private userSession(user) {
-        this.user.token = user.token;
-        this.user.name = user.name;
-        if(user.token != null && user.token != ''){
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('user', JSON.stringify(this.user));
+        let self = this;
+        this.userService.loginUser(req, function(user, message){
+            self.user.token = user.token;
+            self.user.name = user.name;
+            if(user.token != null && user.token != ''){
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('user', JSON.stringify(self.user));
 
-            this.router.navigate(['/dashboard']);
-        }else{
-            localStorage.setItem('isLoggedIn', 'false');
-            localStorage.setItem('user', '');
+                self.router.navigate(['/dashboard']);
+            }else{
+                localStorage.setItem('isLoggedIn', 'false');
+                localStorage.setItem('user', '');
 
-            this.router.navigate(['/login']);
-        }
+                self.router.navigate(['/login']);
+            }
+        });
     }
 
 }

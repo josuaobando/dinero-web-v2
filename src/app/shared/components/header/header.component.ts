@@ -45,10 +45,15 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedOut() {
+        localStorage.removeItem('user');
+        localStorage.removeItem('isLoggedIn');
+        this.router.navigate(['/login']);
+        /*
         this.userService.logoutUser({})
             .then(res => {
                 this.logout(res);
             }, error => this.errorMessage = <any>error);
+            */
     }
 
     private logout(res) {

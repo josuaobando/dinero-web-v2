@@ -18,3 +18,7 @@ $ npm start
 # Prod build, will output the production application in `dist`
 # The produced code can be deployed (rsynced) to a remote server
 $ npm run build
+# Check Updates
+$ npm install -g npm-check
+# Install updates
+$ npm-check -u

@@ -12,6 +12,10 @@ export class ReportComponent implements OnInit {
     errorMessage: string;
     beginDate: any;
     endDate: any;
+    address: string;
+    transactionTypeId: number;
+    transactionStatusId: number;
+    transactionCurrencyId: number;
 
     filteredItems: Array<Transaction>;
     pages: number = 4;
@@ -47,10 +51,10 @@ export class ReportComponent implements OnInit {
     actionSearch() {
         this.filteredItems = Array<Transaction>();
         let req = {dateFrom: this.formatDate(this.beginDate), dateTo: this.formatDate(this.endDate)};
-        this.transactionService.getTransactions(req)
+       /* this.transactionService.getTransactions(req)
             .then(transactions => {
                 this.reportTransactions(transactions);
-            }, error => this.errorMessage = <any>error);
+            }, error => this.errorMessage = <any>error);*/
     }
 
     reportTransactions(transactions) {
