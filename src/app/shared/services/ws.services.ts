@@ -9,10 +9,17 @@ import {AppSettings} from '../../../app.config';
 @Injectable()
 export class WSService{
 
+    public code: number;
+    public message: string;
+    public lastResponse: Object;
+
     /**
      * @param http
      */
     constructor(private http: HttpClient){
+        this.code = 0;
+        this.message = '';
+        this.lastResponse = null;
     }
 
     /**
@@ -21,8 +28,21 @@ export class WSService{
      * @param callback
      */
     exPost(req: Object, callback){
+        let self = this;
         this.post(req, function(res){
-            callback(res.response, res.message);
+
+            try {
+                self.code = res.code;
+                self.message = res.message;
+                self.lastResponse = res.response;
+
+                callback(self.lastResponse, self.message);
+            } catch (e) {
+                console.log((<Error>e).message);
+                callback(null, 'Error');
+            }
+
+
             /*
              if(typeof res === 'undefined' || res === null){
              callback(null);
