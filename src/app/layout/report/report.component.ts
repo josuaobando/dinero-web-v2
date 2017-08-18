@@ -7,7 +7,7 @@ import {TransactionService} from '../../transaction/transaction.service';
     templateUrl: './report.component.html',
     styleUrls: ['./report.component.scss']
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit{
 
     errorMessage: string;
     beginDate: any;
@@ -26,7 +26,7 @@ export class ReportComponent implements OnInit {
     pagesIndex: Array<number>;
     pageStart: number = 1;
 
-    constructor(private transactionService: TransactionService) {
+    constructor(private transactionService: TransactionService){
         this.filteredItems = Array<Transaction>();
         this.items = Array<Transaction>();
 
@@ -40,7 +40,7 @@ export class ReportComponent implements OnInit {
         this.endDate = initialDate;
     };
 
-    ngOnInit() {
+    ngOnInit(){
     }
 
     private formatDate(dateObj){
@@ -48,33 +48,33 @@ export class ReportComponent implements OnInit {
         return date.toDateString();
     }
 
-    actionSearch() {
+    actionSearch(){
         this.filteredItems = Array<Transaction>();
         let req = {dateFrom: this.formatDate(this.beginDate), dateTo: this.formatDate(this.endDate)};
-       /* this.transactionService.getTransactions(req)
-            .then(transactions => {
-                this.reportTransactions(transactions);
-            }, error => this.errorMessage = <any>error);*/
+        /* this.transactionService.getTransactions(req)
+         .then(transactions => {
+         this.reportTransactions(transactions);
+         }, error => this.errorMessage = <any>error);*/
     }
 
-    reportTransactions(transactions) {
+    reportTransactions(transactions){
         if(transactions && transactions instanceof Array && transactions.length){
             this.filteredItems = transactions;
             this.init();
         }
     }
 
-    init() {
+    init(){
         this.currentIndex = 1;
         this.pageStart = 1;
         this.pages = 4;
 
         this.pageNumber = parseInt("" + (this.filteredItems.length / this.pageSize));
-        if (this.filteredItems.length % this.pageSize != 0) {
+        if(this.filteredItems.length % this.pageSize != 0){
             this.pageNumber++;
         }
 
-        if (this.pageNumber < this.pages) {
+        if(this.pageNumber < this.pages){
             this.pages = this.pageNumber;
         }
 
@@ -82,41 +82,41 @@ export class ReportComponent implements OnInit {
         console.log("this.pageNumber :  " + this.pageNumber);
     }
 
-    fillArray(): any {
+    fillArray(): any{
         let obj = new Array();
-        for (let index = this.pageStart; index < this.pageStart + this.pages; index++) {
+        for(let index = this.pageStart; index < this.pageStart + this.pages; index++){
             obj.push(index);
         }
         return obj;
     }
 
-    refreshItems() {
+    refreshItems(){
         this.items = this.filteredItems.slice((this.currentIndex - 1) * this.pageSize, (this.currentIndex) * this.pageSize);
         this.pagesIndex = this.fillArray();
     }
 
-    prevPage() {
-        if (this.currentIndex > 1) {
+    prevPage(){
+        if(this.currentIndex > 1){
             this.currentIndex--;
         }
-        if (this.currentIndex < this.pageStart) {
+        if(this.currentIndex < this.pageStart){
             this.pageStart = this.currentIndex;
         }
         this.refreshItems();
     }
 
-    nextPage() {
-        if (this.currentIndex < this.pageNumber) {
+    nextPage(){
+        if(this.currentIndex < this.pageNumber){
             this.currentIndex++;
         }
-        if (this.currentIndex >= (this.pageStart + this.pages)) {
+        if(this.currentIndex >= (this.pageStart + this.pages)){
             this.pageStart = this.currentIndex - this.pages + 1;
         }
 
         this.refreshItems();
     }
 
-    setPage(index: number) {
+    setPage(index: number){
         this.currentIndex = index;
         this.refreshItems();
     }

@@ -8,18 +8,18 @@ import {User} from './../user/user';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit{
 
     user = new User();
     errorMessage: String;
 
-    constructor(public router: Router, private userService: UserService) {
+    constructor(public router: Router, private userService: UserService){
     }
 
-    ngOnInit() {
+    ngOnInit(){
     }
 
-    loginUser() {
+    loginUser(){
         let req = {username: this.user.login, password: this.user.password};
 
         let self = this;

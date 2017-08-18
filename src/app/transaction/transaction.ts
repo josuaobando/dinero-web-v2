@@ -1,4 +1,4 @@
-export class Transaction {
+export class Transaction{
     id: number;
     date: string;
     address: string;
@@ -12,6 +12,6 @@ export class Transaction {
     processingFee: number;
     exchangeFee: number;
 
-    constructor() {
+    constructor(){
     }
 }

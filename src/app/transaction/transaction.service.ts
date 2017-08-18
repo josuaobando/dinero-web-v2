@@ -8,12 +8,12 @@ import {WSService} from "../shared/services/ws.services";
 
 @Injectable()
 export class TransactionService extends WSService{
-/*
-    getTransactions(req: Object): Promise<any> {
-        req['method'] = 'report';
-        return this.exPost(req, this.extractTransactionsData)
-    }
-*/
+    /*
+     getTransactions(req: Object): Promise<any> {
+     req['method'] = 'report';
+     return this.exPost(req, this.extractTransactionsData)
+     }
+     */
     extractTransactionsData(res: Response){
         let transactions = Array<Transaction>();
 
@@ -22,7 +22,7 @@ export class TransactionService extends WSService{
 
             let transactionsData = body.transactions;
             if(transactionsData){
-                for (let _i = 0; _i < transactionsData.length; _i++) {
+                for(let _i = 0; _i < transactionsData.length; _i++){
                     let transactionData = transactionsData[_i];
                     let transaction = new Transaction();
 

@@ -1,29 +1,29 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PageHeaderModule } from './../../shared';
-import { ReportComponent } from './report.component';
+import {PageHeaderModule} from './../../shared';
+import {ReportComponent} from './report.component';
 
-describe('ReportComponent', () => {
-  let component: ReportComponent;
-  let fixture: ComponentFixture<ReportComponent>;
+describe('ReportComponent', () =>{
+    let component: ReportComponent;
+    let fixture: ComponentFixture<ReportComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-    imports: [
-      PageHeaderModule,
-    ],
-      declarations: [ ReportComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() =>{
+        TestBed.configureTestingModule({
+                imports: [
+                    PageHeaderModule,
+                ],
+                declarations: [ReportComponent]
+            })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ReportComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() =>{
+        fixture = TestBed.createComponent(ReportComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () =>{
+        expect(component).toBeTruthy();
+    });
 });

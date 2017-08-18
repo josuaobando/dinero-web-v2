@@ -1,31 +1,31 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Http } from '@angular/http';
-import { TranslateModule,TranslateService,TranslateLoader } from '@ngx-translate/core';
+import {ComponentFixture, TestBed, async} from '@angular/core/testing';
+import {Http} from '@angular/http';
+import {TranslateModule, TranslateService, TranslateLoader} from '@ngx-translate/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 
-describe('AppComponent', () => {
-  let fixture: ComponentFixture<AppComponent>;
-  let component: AppComponent;
+describe('AppComponent', () =>{
+    let fixture: ComponentFixture<AppComponent>;
+    let component: AppComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        TranslateModule.forRoot()
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
+    beforeEach(async(() =>{
+        TestBed.configureTestingModule({
+            imports: [
+                TranslateModule.forRoot()
+            ],
+            declarations: [
+                AppComponent
+            ],
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
-    component = fixture.componentInstance;
-  });
+    beforeEach(() =>{
+        fixture = TestBed.createComponent(AppComponent);
+        component = fixture.componentInstance;
+    });
 
-  it('should create the app', async(() => {
-    expect(component).toBeTruthy();
-  }));
+    it('should create the app', async(() =>{
+        expect(component).toBeTruthy();
+    }));
 
 });

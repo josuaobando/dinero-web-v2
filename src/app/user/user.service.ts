@@ -7,7 +7,7 @@ import {User} from './user';
 import {WSService} from "../shared/services/ws.services";
 
 @Injectable()
-export class UserService extends WSService {
+export class UserService extends WSService{
     /*
      loginUser(req: Object): Promise<any> {
      req['method'] = 'authenticate';
@@ -15,12 +15,12 @@ export class UserService extends WSService {
      }
      */
 
-    loginUser(req: Object, callback) {
+    loginUser(req: Object, callback){
         req['method'] = 'authenticate';
-        this.exPost(req, function(res, message) {
+        this.exPost(req, function(res, message){
             let user = new User();
 
-            if (res && res.account) {
+            if(res && res.account){
                 user.token = res.token;
                 user.name = res.account.username;
             }
@@ -29,16 +29,16 @@ export class UserService extends WSService {
         })
     }
 
-    logoutUser(req: Object): Promise<any> {
+    logoutUser(req: Object): Promise<any>{
         req['method'] = 'logout';
         return this.post(req, this.extractLogoutData)
     }
 
-    extractLogoutData(res: Response) {
+    extractLogoutData(res: Response){
 
         let logout: boolean;
         let body = res.json();
-        if (body && body.logout) {
+        if(body && body.logout){
             logout = body.logout;
         }
 

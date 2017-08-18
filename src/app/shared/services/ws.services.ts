@@ -31,17 +31,16 @@ export class WSService{
         let self = this;
         this.post(req, function(res){
 
-            try {
+            try{
                 self.code = res.code;
                 self.message = res.message;
                 self.lastResponse = res.response;
 
                 callback(self.lastResponse, self.message);
-            } catch (e) {
+            }catch(e){
                 console.log((<Error>e).message);
                 callback(null, 'Error');
             }
-
 
             /*
              if(typeof res === 'undefined' || res === null){

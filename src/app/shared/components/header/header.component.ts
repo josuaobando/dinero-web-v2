@@ -9,7 +9,7 @@ import {UserService} from "../../../user/user.service";
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit{
 
     /**
      * @type {User}
@@ -17,54 +17,54 @@ export class HeaderComponent implements OnInit {
     currentUser = new User();
     errorMessage: string;
 
-    constructor(private translate: TranslateService, public router: Router, private userService: UserService) {
-        this.router.events.subscribe((val) => {
-            if (val instanceof NavigationEnd && window.innerWidth <= 992) {
+    constructor(private translate: TranslateService, public router: Router, private userService: UserService){
+        this.router.events.subscribe((val) =>{
+            if(val instanceof NavigationEnd && window.innerWidth <= 992){
                 this.toggleSidebar();
             }
         });
     }
 
-    ngOnInit() {
+    ngOnInit(){
         let userStorage = localStorage.getItem('user');
-        if (userStorage) {
+        if(userStorage){
             let obj = JSON.parse(userStorage);
             this.currentUser.login = obj.login;
             this.currentUser.name = obj.name;
         }
     }
 
-    toggleSidebar() {
+    toggleSidebar(){
         const dom: any = document.querySelector('body');
         dom.classList.toggle('push-right');
     }
 
-    rltAndLtr() {
+    rltAndLtr(){
         const dom: any = document.querySelector('body');
         dom.classList.toggle('rtl');
     }
 
-    onLoggedOut() {
+    onLoggedOut(){
         localStorage.removeItem('user');
         localStorage.removeItem('isLoggedIn');
         this.router.navigate(['/login']);
         /*
-        this.userService.logoutUser({})
-            .then(res => {
-                this.logout(res);
-            }, error => this.errorMessage = <any>error);
-            */
+         this.userService.logoutUser({})
+         .then(res => {
+         this.logout(res);
+         }, error => this.errorMessage = <any>error);
+         */
     }
 
-    private logout(res) {
-        if (res) {
+    private logout(res){
+        if(res){
             localStorage.removeItem('user');
             localStorage.removeItem('isLoggedIn');
             this.router.navigate(['/login']);
         }
     }
 
-    changeLang(language: string) {
+    changeLang(language: string){
         this.translate.use(language);
     }
 }

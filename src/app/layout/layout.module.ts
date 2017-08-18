@@ -24,5 +24,5 @@ import {UserService} from "../user/user.service";
         UserService
     ],
 })
-export class LayoutModule {
+export class LayoutModule{
 }
