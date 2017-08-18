@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit{
 
     constructor(){
         this.sliders.push({
-            imagePath: 'assets/images/bitcoin.jpg',
+            imagePath: 'assets/images/',
             label: 'BITCOIN',
             text: 'Digital Centralized Peer to Peer'
         });
