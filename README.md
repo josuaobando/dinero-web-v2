@@ -22,3 +22,5 @@ $ npm run build
 $ npm install -g npm-check
 # Install updates
 $ npm-check -u
+
+#By replacing ngOutletContext to ngTemplateOutletContext in all files.

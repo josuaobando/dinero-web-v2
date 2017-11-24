@@ -44,3 +44,4 @@ e2e
 Thumbs.db
 e2e/
 app.config.ts
+/dist/
